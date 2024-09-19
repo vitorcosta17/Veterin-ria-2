@@ -1,0 +1,563 @@
+/* PAGINA INICIAL */
+/* Estilos básicos de reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Cabeçalho com logo, barra de pesquisa, carrinho e sidebar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4CAF50;
+    padding: 20px 20px;
+    color: white;
+    position: relative;
+}
+
+/* Conteúdo principal */
+main {
+    padding: 20px;
+}
+
+
+
+
+
+
+
+/* SIDEBAR */
+/* Ajustes no botão para abrir a sidebar */
+#sidebarToggle {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1001;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+/* Mostrar sidebar quando aberta */
+.sidebar.open {
+    display: flex;
+}
+
+
+
+
+
+/* LOGO */
+/* Logo e nome do site */
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 160px; /* Move a logo mais para a direita */
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+
+
+
+
+/* BARRA DE PESQUISA */
+/* Barra de pesquisa */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 120px; /* Move a barra de pesquisa mais para a direita */
+}
+
+.search-bar input {
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid #ddd;
+    width: 300px;
+    font-size: 16px;
+    outline: none;
+    transition: width 0.3s ease;
+}
+
+.search-bar input:focus {
+    width: 350px;
+    border-color: #4CAF50;
+}
+
+.search-bar button {
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.search-bar button:hover {
+    background-color: #ddd;
+}
+
+
+
+
+
+/* BOTAO CARRINHO */
+/* Botão do carrinho */
+.cart {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+#cartButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#cartButton img {
+    width: 24px;
+    height: 24px;
+}
+
+
+
+
+
+/* CATEGORIAS */
+/* Barra de categorias */
+.category-bar {
+    background-color: #f4f4f4;
+    text-align: center; /* Centraliza a barra de categorias */
+    padding: 10px 0;
+    overflow-x: auto;
+}
+
+.category-button {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.category-button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+
+
+
+/* PRDUTOS */
+/* Estilo para a lista de produtos */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding:10px;
+    text-align: center;
+    width: calc(25% - 20px); /* Ajusta a largura dos produtos para duas colunas */
+}
+
+
+.product h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.product p {
+    font-size: 14px;
+    color: #666;
+}
+
+.product span {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.product button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.product button:hover {
+    background-color: #45a049;
+}
+
+
+
+
+
+/* CARRINHO */
+/* Estilo para a lista de itens do carrinho */
+.cart-items {
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.cart-item img {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h3 {
+    margin: 0 0 10px;
+}
+
+.item-details p {
+    margin: 0 0 5px;
+}
+
+.item-details span {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.item-details input {
+    width: 60px;
+    margin-right: 10px;
+}
+
+.item-details button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.item-details button:hover {
+    background-color: #e53935;
+}
+
+/* Estilo para o resumo do carrinho */
+.cart-summary {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.cart-summary h3 {
+    margin: 0 0 10px;
+}
+
+.cart-summary div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cart-summary span {
+    font-size: 16px;
+}
+
+#checkoutButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#checkoutButton:hover {
+    background-color: #45a049;
+}
+
+
+
+
+
+/* FINAL DA PAGINA */
+/* Rodapé */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+/* TESTE */
+
+.logo img {
+    height: 50px; /* Ajuste o tamanho do logo conforme necessário */
+}
+
+.search-bar input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+   
+.product-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+.product-info {
+    max-width: 600px;
+    flex: 1;
+}
+
+.product-info h2 {
+    margin-top: 0;
+}
+
+.product-info .description {
+    margin: 10px 0;
+}
+
+.product-info .weight {
+    font-size: 1.1em;
+    color: white;
+    margin: 10px 0;
+}
+
+.product-info .price {
+    display: block;
+    margin: 20px 0;
+    font-size: 1.5em;
+    color: white;
+}
+
+.product-info button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product-info button:hover {
+    background-color: #04f00f;
+}
+
+/* Rodapé */
+footer {
+    padding: 10px;
+    background-color: #f8f8f8;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+    
+
+
+
+
+
+
+
+.logo img {
+    height: 50px; /* Ajuste o tamanho do logo conforme necessário */
+}
+
+.search-bar input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.cart button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.cart img {
+    height: 30px;
+}
+
+/* Barra de categorias */
+.category-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+
+
+.category-button:hover {
+    background-color: #15ff00;
+}
+
+/* Estilos para o detalhe do produto */
+
+
+.product-info h2 {
+    margin-top: 0;
+}
+
+.product-info .description {
+    margin: 10px 0;
+}
+
+.product-info .weight {
+    font-size: 1.1em;
+    color: #666;
+    margin: 10px 0;
+}
+
+.product-info .price {
+    display: block;
+    margin: 20px 0;
+    font-size: 1.5em;
+    color: #ff0000;
+}
+
+.product-info button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.product-info button:hover {
+    background-color: #4CAF50;
+}
+
+/* Estilo para o resumo de preços */
+.price-summary {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.price-summary p {
+    margin: 5px 0;
+}
+
+.price-summary #total {
+    font-weight: bold;
+    color: #d9534f; /* Cor para destacar o total */
+}
+
+/* Estilo para a seção de frete */
+.delivery-info {
+    margin-top: 20px;
+}
+
+.delivery-info label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.delivery-info input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.delivery-info button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delivery-info button:hover {
+    background-color: #4CAF50;
+}
+
+/* Rodapé */
+footer {
+    padding: 10px;
+    background-color: #f8f8f8;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}

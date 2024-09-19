@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - Veterinária XYZ</title>
+    <link rel="stylesheet" href="car.css">
+</head>
+<body>
+    <script></script>
+    <header>
+       
+
+           <!-- Logo do site -->
+           <div class="logo">
+               <img src="FOTOS/logo.png" alt="Logotipo">
+               <h1>Veterinária XYZ</h1>
+           </div>
+   
+           <!-- Barra de pesquisa -->
+           <div class="search-bar">
+               <input type="text" id="searchInput" placeholder="Pesquisar...">
+               <button onclick="search()">🔍</button>
+           </div>
+   
+           <!-- Botão do carrinho com contador de itens -->
+           <div class="cart">
+               <a href="carrinho.html">
+                   <button id="cartButton">
+                       <img src="FOTOS/carrinho.png" alt="Carrinho" />
+                       <span id="itemCount">0</span>
+                   </button>
+               </a>
+           </div>
+       </header>
+   
+       <!-- Sidebar com menu e área de criação de perfil -->
+       <div class="sidebar">
+           <!-- Formulário para criação de perfil -->
+           <div class="create-profile">
+               <h2>Criar Perfil</h2>
+               <form id="profileForm">
+                   <input type="text" placeholder="Nome" required>
+                   <input type="email" placeholder="Email" required>
+                   <input type="password" placeholder="Senha" required>
+                   <button type="submit">Criar</button>
+               </form>
+           </div>
+       </div>
+   
+       <!-- Barra de categorias -->
+       <section class="category-bar">
+           <a href="VENDAS.html"><button class="category-button">Clínica Veterinária</button></a>
+           <button class="category-button">Hotel para Pet</button>
+           <button class="category-button">Pet Shop</button>
+           <button class="category-button">Castração</button>
+           <button class="category-button">Adestradores</button>
+           <button class="category-button">Quero Adotar</button>
+       </section>
+   
+    </header>
+
+    <main>
+        <section id="cartItems">
+            <!-- Os itens do carrinho serão adicionados aqui dinamicamente com JavaScript -->
+        </section>
+
+        <section id="cartSummary">
+            <h2>Resumo do Carrinho</h2>
+            <p id="totalPrice">Total: R$ 0,00</p>
+            <form id="couponForm">
+                <input type="text" id="couponCode" placeholder="Código do Cupom">
+                <button type="submit">Aplicar Cupom</button>
+            </form>
+            <p id="discount">Desconto: R$ 0,00</p>
+           
+            <button id="finalizeButton">Finalizar Compra</button>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Veterinária XYZ. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

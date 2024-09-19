@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas - Site de Veterinária</title>
+    <style>
+        /* Estilos básicos de reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #4CAF50;
+            padding: 20px;
+            color: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-left: 160px;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            margin-right: 120px;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            border-radius: 20px;
+            border: 2px solid #ddd;
+            width: 300px;
+            font-size: 16px;
+            outline: none;
+            transition: width 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            width: 350px;
+            border-color: #4CAF50;
+        }
+
+        .cart {
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        #cartButton {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        #cartButton img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Barra de categorias */
+        .category-bar {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 10px 0;
+            overflow-x: auto;
+        }
+
+        .category-button {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .category-button:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            width: calc(25% - 20px);
+        }
+
+        .product-item img {
+            max-width: 100%;
+            height: 200px;
+            border-radius: 20px;
+        }
+
+        .product-item h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .product-item p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .product-item button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .product-item button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+            nav a {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <img src="FOTOS/logo.png" alt="Logotipo da Veterinária XYZ">
+            <h1>Veterinária XYZ</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Pesquisar...">
+            <button onclick="search()">🔍</button>
+        </div>
+        <div class="cart">
+            <a href="carrinho.html">
+                <button id="cartButton">
+                    <img src="FOTOS/carrinho.png" alt="Carrinho de Compras">
+                    <span id="itemCount">0</span>
+                </button>
+            </a>
+        </div>
+    </header>
+
+    <!-- Barra de categorias -->
+    <section class="category-bar">
+        <a href="VENDAS.html"><button class="category-button">Clínica Veterinária</button></a>
+        <button class="category-button">Hotel para Pet</button>
+        <button class="category-button">Pet Shop</button>
+        <button class="category-button">Castração</button>
+        <button class="category-button">Adestradores</button>
+        <button class="category-button">Quero Adotar</button>
+    </section>
+
+    <!-- Conteúdo principal para vendas -->
+    <main>
+        <h2>Produtos em Oferta</h2>
+        <div class="product-list" id="productList"></div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Veterinária XYZ. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        
+        function addToCart(image, name, price) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            let item = cartItems.find(item => item.name === name);
+
+            if (item) {
+                item.quantity += 1;
+            } else {
+                item = { image, name, price, quantity: 1 };
+                cartItems.push(item);
+            }
+
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('itemCount').textContent = itemCount;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+            displayProducts();
+        });
+
+        function displayProducts() { 8
+            const products = [
+                { id: 1, name: "Ração Premium", price: 99.00, description: "Ração de alta qualidade para cães e gatos.", image: "FOTOS/produto1.jpg", link: "produto1.html" },
+                { id: 2, name: "Brinquedo Interativo", price: 25.00, description: "Brinquedo para manter seu pet ativo e feliz.", image: "FOTOS/produto2.jpg", link: "produto2.html" },
+                { id: 3, name: "Coleira de Couro", price: 50.00, description: "Coleira durável e confortável.", image: "FOTOS/produto3.jpg", link: "produto3.html" },
+                { id: 4, name: "Cama Confortável", price: 120.00, description: "Cama macia para o descanso do seu pet.", image: "FOTOS/produto4.jpg", link: "produto4.html" },
+                { id: 5, name: "Ração para Filhotes", price: 60.00, description: "Ração especial para filhotes.", image: "FOTOS/produto5.jpg", link: "produto5.html" },
+                { id: 6, name: "Brinquedo de Pelúcia", price: 30.00, description: "Brinquedo macio e divertido.", image: "FOTOS/produto6.jpg", link: "produto6.html" },
+                { id: 7, name: "Shampoo Antisséptico", price: 40.00, description: "Shampoo para higiene e saúde do seu pet.", image: "FOTOS/produto7.jpg", link: "produto7.html" },
+                { id: 8, name: "Areia para Gato", price: 15.00, description: "Areia absorvente para caixa de gato.", image: "FOTOS/produto8.jpg", link: "produto8.html" },
+                { id: 9, name: "Comedouro Automático", price: 90.00, description: "Comedouro que dispensa ração automaticamente.", image: "FOTOS/produto9.jpg", link: "produto9.html" },
+                { id: 10, name: "Transportadora para Pet", price: 150.00, description: "Transportadora segura e confortável.", image: "FOTOS/produto10.jpg", link: "produto10.html" },
+                { id: 11, name: "Vacina Antirrábica", price: 100.00, description: "Vacinação essencial para pets.", image: "FOTOS/produto11.jpg", link: "produto11.html" },
+                { id: 12, name: "Caminha de Viagem", price: 80.00, description: "Caminha prática para viagens.", image: "FOTOS/produto12.jpg", link: "produto12.html" },
+                { id: 13, name: "Coleira Refletiva", price: 45.00, description: "Coleira segura para passeios noturnos.", image: "FOTOS/produto13.jpg", link: "produto13.html" },
+                { id: 14, name: "Brinquedo de Corda", price: 20.00, description: "Brinquedo resistente para cães.", image: "FOTOS/produto14.jpg", link: "produto14.html" },
+                { id: 15, name: "Ração Hipoalergênica", price: 85.00, description: "Ração para cães com alergias.", image: "FOTOS/produto15.jpg", link: "produto15.html" },
+                { id: 16, name: "Gaiola para Pequenos Animais", price: 200.00, description: "Gaiola ideal para coelhos e hamsters.", image: "FOTOS/produto16.jpg", link: "produto16.html" },
+                { id: 17, name: "Cuidado Dental", price: 35.00, description: "Produto para higiene dental dos pets.", image: "FOTOS/produto17.jpg", link: "produto17.html" },
+                { id: 18, name: "Tapete Higiênico", price: 25.00, description: "Tapete absorvente para treinamento de pets.", image: "FOTOS/produto18.jpg", link: "produto18.html" },
+                { id: 19, name: "Tapete Higiênico", price: 50.00, description: "Roupinha estilosa para o seu amigo.", image: "FOTOS/produto19.jpg", link: "produto19.html" },
+                { id: 20, name: "Refil de Areia para Gato", price: 15.00, description: "Refil de areia para caixinha de gato.", image: "FOTOS/produto20.jpg", link: "produto20.html" },
+                { id: 21, name: "Secador para Pet", price: 120.00, description: "Secador específico para pelagens.", image: "FOTOS/produto21.jpg", link: "produto21.html" },
+                { id: 22, name: "Comedouro de Silicone", price: 30.00, description: "Comedouro prático e fácil de limpar.", image: "FOTOS/produto22.jpg", link: "produto22.html" },
+                { id: 23, name: "Caixa de Transporte", price: 110.00, description: "Caixa segura para transporte de animais.", image: "FOTOS/produto23.jpg", link: "produto23.html" },
+                { id: 24, name: "Colônia para Pets", price: 25.00, description: "Colônia com fragrância suave para pets.", image: "FOTOS/produto24.jpg", link: "produto24.html" }
+            ];
+
+            const productList = document.getElementById('productList');
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product-item';
+                productDiv.innerHTML = `
+                    <a href="${product.link}">
+                        <img src="${product.image}" alt="${product.name}">
+                    </a>
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <p>R$ ${product.price.toFixed(2)}</p>
+                    <button onclick="addToCart('${product.image}', '${product.name}', ${product.price})">Adicionar ao Carrinho</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        function search() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const productItems = document.querySelectorAll('.product-item');
+
+            productItems.forEach(item => {
+                const productName = item.querySelector('h3').textContent.toLowerCase();
+                item.style.display = productName.includes(query) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
